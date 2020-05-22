@@ -1,5 +1,4 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-declare var $: any;
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -8,22 +7,29 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit{
+// Form validation check validation
   validFormChecked:boolean=false;
-  states=["Gujarat","Goa"];
-  stateSelected;
-  selectedCitys;
 
-  citys={
-    "Gujarat":["Rajkot","Ahmedabad","Gondal"],
-    "Goa":["Goa","Jua","Panji"]
-  }
+// Date validation and all date section
   startDate=new Date();
   maxDate:Date;
+
+
   constructor() {
     this.maxDate=new Date();
   }
 
   ngOnInit() {
+  }
+
+
+  // state and city section data
+  states=["Gujarat","Goa"];
+  stateSelected;
+  selectedCitys;
+  citys={
+    "Gujarat":["Rajkot","Ahmedabad","Gondal"],
+    "Goa":["Goa","Jua","Panji"]
   }
   cityChanges(){
     this.selectedCitys=this.citys[this.stateSelected];
@@ -34,7 +40,18 @@ export class SigninComponent implements OnInit{
       this.validFormChecked=true;
     }
     if(userRegisterForm.valid){
-      alert(userRegisterForm.value);
+      // console.log(
+      // userRegisterForm.value.firstName +" "+
+      // userRegisterForm.value.middleName +" "+
+      // userRegisterForm.value.lastName +" "+
+      // userRegisterForm.value.emailAddress +" "+
+      // userRegisterForm.value.gender +" "+
+      // userRegisterForm.value.state +" "+
+      // userRegisterForm.value.city +" "+
+      // userRegisterForm.value.birthDate +" "+
+      // userRegisterForm.value.mobileNumber +" "+
+      // userRegisterForm.value.password
+      // );
     }
   }
 }
