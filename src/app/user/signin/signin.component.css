@@ -1,0 +1,33 @@
+/* Success Part */
+input.ng-untouched{
+  border: 1px solid seagreen;
+  box-shadow: seagreen 1px 2px;
+}
+input.ng-valid{
+  border: 1px solid seagreen;
+  box-shadow: seagreen 1px 2px;
+}
+.success{
+  border: 1px solid seagreen;
+  box-shadow: seagreen 1px 2px;
+}
+
+/* Error Part */
+.has-error{
+  border: 1px solid red;
+  box-shadow: red 1px 2px;
+}
+input.ng-touched.ng-invalid{
+  border: 1px solid red;
+  box-shadow: red 1px 2px;
+}
+.animationClass{
+  background-color:salmon;
+  position: relative;
+  animation-name: forminValid;
+  animation-duration: 2s;
+  animation-delay: 0s;
+}
+@keyframes forminValid{
+  0%   {background-color:red; top:0px; bottom:200px;}
+}

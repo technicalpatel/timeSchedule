@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { MatDatepickerModule,MatNativeDateModule,MatFormFieldModule,MatInputModule } from '@angular/material';
+
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -13,6 +16,7 @@ import { TodayComponent } from './today/today.component';
 import { LoginComponent } from './user/login/login.component';
 import { SigninComponent } from './user/signin/signin.component';
 import { ProfileComponent } from './user/profile/profile.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes:Routes=[
   {path:'home',component:HomeComponent},
@@ -46,7 +50,13 @@ const routes:Routes=[
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
