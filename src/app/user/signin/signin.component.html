@@ -1,1 +1,132 @@
-<p>signin works!</p>
+<div class="container">
+  <form (ngSubmit)="userRegister(userRegisterForm)" #userRegisterForm="ngForm">
+    <div class="alert alert-danger animationClass" role="alert" *ngIf="validFormChecked">
+      Please fill up below all form details.
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-4 col-sm-6 col-md-4">
+        <div class="form-group">
+          <label for="firstName">First name:</label>
+          <input type="text" class="form-control" id="firstName" name="firstName" aria-describedly="firstNameHelp" placeholder="First name" required ngModel pattern="[a-zA-Z]+[\s]*">
+          <span class="text-danger" *ngIf="userRegisterForm.controls.firstName?.hasError('required') && userRegisterForm.controls.firstName.touched">First name is required</span>
+          <span class="text-danger" *ngIf="userRegisterForm.controls.firstName?.hasError('pattern') && userRegisterForm.controls.firstName.touched">First name is not valid</span>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 col-sm-6 col-md-4">
+        <div class="form-group">
+          <label for="middleName">Middle name:</label>
+          <input type="text" class="form-control" id="middleName" name="middleName" aria-describedly="middleNameHelp" placeholder="Middle name" required ngModel pattern="[a-zA-Z]+[\s]*">
+          <span class="text-danger" *ngIf="userRegisterForm.controls.middleName?.hasError('required') && userRegisterForm.controls.middleName.touched">Middle name is required</span>
+          <span class="text-danger" *ngIf="userRegisterForm.controls.middleName?.hasError('pattern') && userRegisterForm.controls.middleName.touched">Middle name is not valid</span>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 col-sm-6 col-md-4">
+        <div class="form-group">
+          <label for="lastName">Last name:</label>
+          <input type="text" class="form-control" id="lastName" name="lastName" aria-describedly="lastNameHelp" placeholder="Last name" required ngModel pattern="[a-zA-Z]+[\s]*">
+          <span class="text-danger" *ngIf="userRegisterForm.controls.lastName?.hasError('required') && userRegisterForm.controls.lastName.touched">Last name is required</span>
+          <span class="text-danger" *ngIf="userRegisterForm.controls.lastName?.hasError('pattern') && userRegisterForm.controls.lastName.touched">Last name is not valid</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="email">Email Address:</label>
+          <input class="form-control" id="emailAddress" name="emailAddress" type="email" aria-labelledby="emailAddressHelp" placeholder="Email Address" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"  required ngModel>
+          <span class="text-danger" *ngIf="userRegisterForm.controls.emailAddress?.hasError('required') && userRegisterForm.controls.emailAddress.touched">Email  id is required</span>
+          <span class="text-danger" *ngIf="userRegisterForm.controls.emailAddress?.hasError('pattern') && userRegisterForm.controls.emailAddress.touched">Please enter valid  email address</span>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12 col-md-6 col-xl-4">
+        <div class="form-group"  [class.has-error]="userRegisterForm.controls.gender?.invalid && userRegisterForm.controls.gender?.touched">
+          <label for="gender">Gender:</label>
+            <div class="custom-control custom-radio custom-control-inline ml-3">
+              <input type="radio" id="male" name="gender" class="custom-control-input" value="male"  required ngModel>
+              <label class="custom-control-label" for="male" >Male</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline ml-3">
+              <input type="radio" id="female" name="gender" class="custom-control-input" value="female" required ngModel>
+              <label class="custom-control-label" for="female">Female</label>
+            </div>
+        </div>
+        <div>
+          <span class="text-danger" *ngIf="userRegisterForm.controls.gender?.hasError('required') && userRegisterForm.controls.gender.touched">Gender is selected</span>
+        </div>
+      </div>
+      <div class="col-12 col-md-3 col-xl-4">
+        <div class="form-group" [class.has-error]="userRegisterForm.controls.state?.invalid && userRegisterForm.controls.state?.touched">
+          <label for="state">State:</label>
+          <select class="ml-3" name="state" required ngModel [(ngModel)]="stateSelected" (ngModelChange)="cityChanges()">
+            <option> </option>
+            <option *ngFor="let statename of states" [value]="statename">{{statename}}</option>
+          </select>
+        </div>
+        <div>
+          <span class="text-danger" *ngIf="userRegisterForm.controls.state?.hasError('required') && userRegisterForm.controls.state.touched">state name is required</span>
+        </div>
+      </div>
+      <div class="col-12 col-md-3 col-xl-4">
+        <div class="form-group" [class.has-error]="userRegisterForm.controls.city?.invalid && userRegisterForm.controls.city?.touched">
+          <label for="city">City:</label>
+          <select class="ml-3" name="city" required ngModel [(ngModel)]="selectedCitys" (ngModelChange)="cityChanges()" >
+            <option> </option>
+            <option *ngFor="let cityname of selectedCitys" [value]="cityname">{{cityname}}</option>
+          </select>
+        </div>
+          <div>
+              <span class="text-danger" *ngIf="userRegisterForm.controls.city?.hasError('required') && userRegisterForm.controls.city.touched">City name is required</span>
+          </div>
+      </div>
+      <div class="col-sm-6 col-md-12 mt-4">
+        <label for="birthDate">Birth Date:</label>
+        <div class="form-group">
+          <div class="input-group date" id="birthDatePicker">
+
+              <input name="birthDate" matInput [max]="maxDate" [matDatepicker]="myDatepicker" placeholder="Choose a Birth date" required readonly ngModel>
+              <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+              <mat-datepicker touchUi  #myDatepicker [startAt]="startDate"></mat-datepicker>
+
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+          <span class="text-danger" *ngIf="userRegisterForm.controls.birthDate?.hasError('required') && userRegisterForm.controls.birthDate.touched">Birthdate is required</span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="mobile">Mobile No:</label>
+          <input type="text" name="mobileNumber" class="form-control" placeholder="Mobile No:" required ngModel maxlength="10" pattern="(6|7|8|9)[0-9]{9}">
+          <span class="text-danger" *ngIf="userRegisterForm.controls.mobileNumber?.hasError('required') && userRegisterForm.controls.mobileNumber.touched">Mobile number  is required</span>
+          <span class="text-danger" *ngIf="userRegisterForm.controls.mobileNumber?.hasError('pattern') && userRegisterForm.controls.mobileNumber.touched">Mobile number  is not valid</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 form-group">
+        <label for="password">Password:</label>
+        <input type="password" name="password" class="form-control success" [class.has-error]="userRegisterForm.controls.password?.invalid && userRegisterForm.controls.password?.touched" placeholder="password" required ngModel minlength="5" maxlength="8">
+        <span class="text-danger" *ngIf="userRegisterForm.controls.password?.hasError('required') && userRegisterForm.controls.password.touched">Password must be required</span>
+        <span class="text-danger" *ngIf="userRegisterForm.controls.password?.hasError('minlength') && userRegisterForm.controls.password.touched">Password min length 5 character</span>
+        <span class="text-danger" *ngIf="userRegisterForm.controls.password?.hasError('maxlength') && userRegisterForm.controls.password.touched">Password max length 8 character</span>
+      </div>
+      <div class="col-6 form-group">
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" name="confirmPassword" class="form-control success" [class.has-error]="userRegisterForm.controls.confirmPassword?.invalid && userRegisterForm.controls.confirmPassword?.touched" placeholder="confirm password" required ngModel minlength="5" maxlength="8">
+        <span class="text-danger" *ngIf="userRegisterForm.controls.confirmPassword?.hasError('required') && userRegisterForm.controls.confirmPassword.touched">Confirm password must be required</span>
+        <span class="text-danger" *ngIf="userRegisterForm.controls.confirmPassword?.hasError('minlength') && userRegisterForm.controls.confirmPassword.touched">Confirm password min length 5 character</span>
+        <span class="text-danger" *ngIf="userRegisterForm.controls.confirmPassword?.hasError('maxlength') && userRegisterForm.controls.confirmPassword.touched">Confirm password max length 8 character</span>
+        <div *ngIf="userRegisterForm.controls.password?.value !== userRegisterForm.controls.confirmPassword?.value && userRegisterForm.controls.confirmPassword.touched" class="alert alert-danger mt-2" role="alert">Password and confirm password not match</div>
+      </div>
+      <div class="col col-md-12 container">
+        <div class="form-group  container">
+          <button type="submit" class="btn btn-success btn-block" [disabled]="!(userRegisterForm.valid && !(userRegisterForm.controls.password.value!=userRegisterForm.controls.confirmPassword.value ||
+          userRegisterForm.controls.password.value=='' && userRegisterForm.controls.confirmPassword.value==''))">SUBMIT</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
