@@ -1,5 +1,7 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { User } from 'src/app/shared/model/user';
+import { UserServiceService } from 'src/app/shared/service/user-service.service';
 
 @Component({
   selector: 'app-signin',
@@ -15,7 +17,7 @@ export class SigninComponent implements OnInit{
   maxDate:Date;
 
 
-  constructor() {
+  constructor(private userService:UserServiceService) {
     this.maxDate=new Date();
   }
 
@@ -40,18 +42,9 @@ export class SigninComponent implements OnInit{
       this.validFormChecked=true;
     }
     if(userRegisterForm.valid){
-      // console.log(
-      // userRegisterForm.value.firstName +" "+
-      // userRegisterForm.value.middleName +" "+
-      // userRegisterForm.value.lastName +" "+
-      // userRegisterForm.value.emailAddress +" "+
-      // userRegisterForm.value.gender +" "+
-      // userRegisterForm.value.state +" "+
-      // userRegisterForm.value.city +" "+
-      // userRegisterForm.value.birthDate +" "+
-      // userRegisterForm.value.mobileNumber +" "+
-      // userRegisterForm.value.password
-      // );
+      let user:User=userRegisterForm.value;
+      this.userService.userRegistration(user);
+
     }
   }
 }
