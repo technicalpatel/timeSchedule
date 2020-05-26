@@ -17,6 +17,7 @@ import { LoginComponent } from './user/login/login.component';
 import { SigninComponent } from './user/signin/signin.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserServiceService } from './shared/service/user-service.service';
 
 const routes:Routes=[
   {path:'home',component:HomeComponent},
