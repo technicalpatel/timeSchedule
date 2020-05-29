@@ -10,7 +10,17 @@ class UserRoutes{
     let userMiddleware=new UserMiddleware();
     let userController=new UserController();
 
-    this.routes.post('/register',userMiddleware.checkUserIsExists,userController.userRegister);
+    let userRegister=[
+      userMiddleware.bodyCheck,
+      userController.userRegister,
+    ]
+    this.routes.post('/register',userRegister);
+
+    let userLogin=[
+      userMiddleware.bodyCheck,
+      userMiddleware.checkUserIsExists
+    ]
+    this.routes.post('/login',userLogin);
   }
 }
 

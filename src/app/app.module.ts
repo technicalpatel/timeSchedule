@@ -2,7 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { MatDatepickerModule,MatNativeDateModule,MatFormFieldModule,MatInputModule } from '@angular/material';
+import { AuthGuard } from '../app/auth/auth.guard'
 
 
 import { AppComponent } from './app.component';
@@ -17,10 +19,11 @@ import { LoginComponent } from './user/login/login.component';
 import { SigninComponent } from './user/signin/signin.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UserServiceService } from './shared/service/user-service.service';
+import { NavbarService } from './navbar/navbar.service';
+
 
 const routes:Routes=[
-  {path:'home',component:HomeComponent},
+  {path:'home',component:HomeComponent,canActivate:[AuthGuard]},
   {path:'today',component:TodayComponent},
   {path:'work',children:[
     {path:'add',component:AddComponent},
@@ -53,13 +56,14 @@ const routes:Routes=[
     BrowserModule,
     RouterModule.forRoot(routes),
     FormsModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule
   ],
-  providers: [],
+  providers: [AuthGuard,NavbarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
