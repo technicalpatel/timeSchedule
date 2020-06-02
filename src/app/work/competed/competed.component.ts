@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { NavbarService } from '../../navbar/navbar.service'
 @Component({
   selector: 'app-competed',
   templateUrl: './competed.component.html',
@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompetedComponent implements OnInit {
 
-  constructor() { }
+  constructor(private navbarService:NavbarService) {
+    this.navbarService.userCheckInLogin()
+  }
 
   ngOnInit() {
   }

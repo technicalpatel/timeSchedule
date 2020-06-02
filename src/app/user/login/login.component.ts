@@ -36,9 +36,9 @@ export class LoginComponent implements OnInit {
       this.userService.userLogin(userEmail,userPassword).then(
         (result:any)=>{
           localStorage.setItem("time_schedule_user_token",result.userToken);
-          localStorage.setItem("time_schedule_firstName",result.firstName);
-          this.navbarService.navbarStatusSubject.next(false)
-          this.navbarService.userProfilenameSubject.next(localStorage.getItem("time_schedule_firstName"));
+          localStorage.setItem("time_schedule_email",result.email);
+
+          this.navbarService.userCheckInLogin();
           this.router.navigate(['/home'])
         },(reject)=>{
           this.loginValid=reject.message;

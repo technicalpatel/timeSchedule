@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { User } from '../model/user';
 import { HttpClient } from '@angular/common/http'
-import { resolve } from 'url';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
 
-  constructor(private http:HttpClient) { }
+
+  constructor(private http:HttpClient){
+
+     }
+
+
 
   userRegistration(user:User){
     return new Promise((resolve,reject)=>{
@@ -24,6 +27,7 @@ export class UserServiceService {
   }
 
   userLogin(email,password){
+
     let userData={
       userEmail:email,
       userPassword:password
@@ -39,5 +43,12 @@ export class UserServiceService {
       });
     });
    }
+
+  userisValid(authToken){
+    let data;
+    return new Promise((resolve,reject)=>{
+
+    })
+  }
 
 }

@@ -26,7 +26,6 @@
         </li>
         <li class="nav-item ml-2">
           <a class="nav-link" routerLink="contact"><u>C</u>ontact</a>
-
         </li>
       </ul>
     </div>
@@ -37,6 +36,7 @@
     <ng-template #profileBlock>
       <img src="" width="50" height="50">
       <a class="nav-link btn btn-warning" routerLink="user/profile">{{userProfilename}}</a>
+      <a class="nav-link btn btn-danger" (click)="logout()"><u>L</u>ogout</a>
     </ng-template>
   </nav>
 

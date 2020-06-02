@@ -1,1 +1,57 @@
-<p>add works!</p>
+<form [formGroup]="addTaskForm" (ngSubmit)="taskAdd()">
+  <div class="container">
+    <div class="alert alert-danger" role="alert" *ngIf="taskStatus">
+      Your task is not add something is wrong
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field>
+          <mat-label>Task heading</mat-label>
+          <input matInput (cdkAutofill)="taskhead=$event.isAutofilled" formControlName="task_heading">
+          <mat-hint *ngIf="taskhead">Task heading</mat-hint>
+          <mat-error *ngIf="addTaskForm.get('task_heading')?.hasError('required') && addTaskForm.get('task_heading').touched">Please enter a task heading</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field>
+          <mat-label>Task name</mat-label>
+          <input matInput (cdkAutofill)="taskname=$event.isAutofilled" formControlName="task_name">
+          <mat-hint *ngIf="taskname">Task name</mat-hint>
+          <mat-error *ngIf="addTaskForm.get('task_name')?.hasError('required') && addTaskForm.get('task_name').pristine">Please enter a task name</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field class="example-full-width">
+          <mat-label>What you will do  (task description) ?</mat-label>
+          <textarea matInput placeholder="Ex.What you will do?" formControlName="task_description"></textarea>
+          <mat-error *ngIf="addTaskForm.get('task_description')?.hasError('required') && addTaskForm.get('task_description').pristine">Please enter a task description</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field color="accent">
+          <mat-label>Your work start date ?</mat-label>
+          <input matInput [matDatepicker]="picker1" [min]="mindata" formControlName="task_start_date">
+          <mat-datepicker-toggle matSuffix [for]="picker1" minlength></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+          <mat-error *ngIf="addTaskForm.get('task_start_date')?.hasError('required') && addTaskForm.get('task_start_date').pristine">Please select date</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field color="accent">
+          <mat-label>Your work end date ?</mat-label>
+          <input matInput [matDatepicker]="picker2" [min]="mindata" formControlName="task_end_date">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2 color="primary"></mat-datepicker>
+          <mat-error *ngIf="addTaskForm.get('task_end_date')?.hasError('required') && addTaskForm.get('task_end_date').pristine">Please select date</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-6 mt-4">
+          <button class="btn btn-sm btn-primary mt-4">Add task</button>
+      </div>
+    </div>
+  </div>
+</form>

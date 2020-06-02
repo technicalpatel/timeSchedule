@@ -1,13 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MatDatepickerModule,MatNativeDateModule,MatFormFieldModule,MatInputModule } from '@angular/material';
+import { MatDatepickerModule,MatNativeDateModule,MatFormFieldModule,MatInputModule, MAT_DATE_LOCALE} from '@angular/material';
 import { AuthGuard } from '../app/auth/auth.guard'
 
 
-import { AppComponent } from './app.component';
+import { AppComponent, DialogContentExampleDialog } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { AddComponent } from './work/add/add.component';
@@ -20,21 +20,22 @@ import { SigninComponent } from './user/signin/signin.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarService } from './navbar/navbar.service';
+import { AlertComponent } from './dynamic/alert/alert.component';
 
 
 const routes:Routes=[
-  {path:'home',component:HomeComponent,canActivate:[AuthGuard]},
-  {path:'today',component:TodayComponent},
+  {path:'home',component:HomeComponent},
+  {path:'today',component:TodayComponent,canActivate:[AuthGuard]},
   {path:'work',children:[
     {path:'add',component:AddComponent},
     {path:'remove',component:RemoveComponent},
     {path:'complete',component:CompetedComponent}
-  ]},
+  ],canActivate:[AuthGuard]},
   {path:'contact',component:ContactComponent},
   {path:'user',children:[
     {path:'login',component:LoginComponent},
     {path:'signin',component:SigninComponent},
-    {path:'profile',component:ProfileComponent}
+    {path:'profile',component:ProfileComponent,canActivate:[AuthGuard]}
   ]}
 ]
 
@@ -50,12 +51,15 @@ const routes:Routes=[
     TodayComponent,
     LoginComponent,
     SigninComponent,
-    ProfileComponent
+    ProfileComponent,
+    AlertComponent,
+    DialogContentExampleDialog
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatDatepickerModule,
@@ -63,7 +67,9 @@ const routes:Routes=[
     MatFormFieldModule,
     MatInputModule
   ],
-  providers: [AuthGuard,NavbarService],
-  bootstrap: [AppComponent]
+  providers: [AuthGuard,NavbarService,{provide:MAT_DATE_LOCALE, useValue:"en-GB"}],
+  bootstrap: [AppComponent],
+  entryComponents:[AlertComponent,DialogContentExampleDialog]
 })
-export class AppModule { }
+export class AppModule {
+}

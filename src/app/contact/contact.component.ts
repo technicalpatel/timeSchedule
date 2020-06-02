@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
+import { NavbarService } from '../../app/navbar/navbar.service'
 
 @Component({
   selector: 'app-contact',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+  constructor(private navbarService:NavbarService) {
+        this.navbarService.userCheckInLogin()
+   }
 
   ngOnInit() {
   }
