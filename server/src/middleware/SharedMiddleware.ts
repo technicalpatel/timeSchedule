@@ -6,16 +6,18 @@ class SharedMiddleware{
     this.userController=new UserController()
   }
 
-  public userIsValid=(req:Request,res:Response,next:NextFunction)=>{
-    console.log(req.headers)
-    let response=this.userController.userIsValid(req.headers.time_schedule_user_token,req.headers.time_schedule_email)
-    response.then((data)=>{
-      if(data[0].status=="OK"){
-        next();
-      }else{
-        res.status(200).send(data);
-      }
-    })
+  public userIsValid=async (req:Request,res:Response,next:NextFunction)=>{
+    // console.log(req.headers)
+    // console.log(req.body)
+    if(!(req.headers.time_schedule_user_token&&req.headers.time_schedule_email)){
+      return res.status(200).json({status:"ERROR",message:"Header is not sent"})
+    }
+    let response=await this.userController.userIsValid(req.headers.time_schedule_user_token,req.headers.time_schedule_email)
+    if(response[0].status=="OK"){
+      next()
+    }else{
+      return res.status(200).json(response)
+    }
   }
 
 }

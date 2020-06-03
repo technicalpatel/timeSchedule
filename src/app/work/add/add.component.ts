@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarService } from '../../navbar/navbar.service'
-import { FormGroup,FormControl, Validators } from '@angular/forms';
+import { FormGroup,FormControl,Validators } from '@angular/forms';
 import {  TaskAdd } from '../../shared/model/taskAdd'
 import { TaskService } from '../../shared/service/task-service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-add',
@@ -13,12 +14,14 @@ export class AddComponent implements OnInit {
   taskhead:boolean
   taskname:boolean
   taskStatus:boolean
+  taskAddSuccess:boolean
 
   mindata:Date=new Date()
   addTaskForm:FormGroup
 
   constructor(private navbarService:NavbarService,
-    private taskService:TaskService) {
+    private taskService:TaskService,
+    private router:Router) {
     this.navbarService.userCheckInLogin()
   }
 
@@ -41,7 +44,10 @@ export class AddComponent implements OnInit {
       let result=this.taskService.addTask(user_token,user_email,task_add)
       result.then((result:any) => {
         if(result.status=="OK"){
-
+          this.taskAddSuccess=true
+          setTimeout(()=>{
+            this.router.navigate(['/home'])
+          },2000)
         }else{
           this.taskStatus=true
         }
