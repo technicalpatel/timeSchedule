@@ -46,7 +46,7 @@ export class AddComponent implements OnInit {
         if(result.status=="OK"){
           this.taskAddSuccess=true
           setTimeout(()=>{
-            this.router.navigate(['/home'])
+            this.router.navigate(['/today'])
           },2000)
         }else{
           this.taskStatus=true

@@ -14,6 +14,12 @@ class WorkRoutes{
       taskController.addTask
     ]
     this.routes.post("/add",addWorkMiddleware)
+
+    let tasksAllMiddleware=[
+      sharedMiddleware.userIsValid,
+      taskController.getTaskAll
+    ]
+    this.routes.get("/all",tasksAllMiddleware)
   }
 }
 export default WorkRoutes

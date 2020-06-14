@@ -1,1 +1,32 @@
-<p>today works!</p>
+<ng-template [ngIf]="taskProgressStatus">
+  <div class="d-flex w-100 justify-content-center mt-5">
+    <div class="spinner-border m-5 mt-5" role="status">
+      <span class="sr-only justify-content-center mt-5">Loading...</span>
+    </div>
+  </div>
+  <div class="d-flex w-100 justify-content-center">
+    <h5 class="justify-content-center">Fetching data in progressing....</h5>
+  </div>
+</ng-template>
+<div class="container" *ngIf="!taskProgressStatus">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-lg-6" *ngFor="let task of taskAllData">
+            <div class="card" style="width: 30rem;">
+                <img src="../../assets/images/timeschedule.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-8">
+                      <h5 class="card-title">{{task.task_heading}}</h5>
+                    </div>
+                    <div class="col-4">
+                      <h5 class="card-title">{{task.task_start_date|date}}</h5>
+                    </div>
+                  </div>
+                  <h6 class="card-title">{{task.task_name}}</h6>
+                  <p class="card-text">{{task.task_description}}</p>
+                  <a routerLink="#" class="btn btn-primary">View task</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

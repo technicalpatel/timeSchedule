@@ -29,5 +29,18 @@ class TaskController{
       }
     })
   }
+
+  getTaskAll=async (req:Request,res:Response)=>{
+    TaskSchema.find({},((error,response)=>{
+      if(error){
+        res.status(200).json({status:"ERROR",message:"Soomething is wrong"})
+      }
+      if(response.length>=0){
+        res.status(200).json({status:"OK",message:"Data is available",data:response})
+      }else{
+        res.status(200).json({status:"ERROR",message:"Data is not available"})
+      }
+    }))
+  }
 }
 export default TaskController

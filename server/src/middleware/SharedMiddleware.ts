@@ -7,8 +7,6 @@ class SharedMiddleware{
   }
 
   public userIsValid=async (req:Request,res:Response,next:NextFunction)=>{
-    // console.log(req.headers)
-    // console.log(req.body)
     if(!(req.headers.time_schedule_user_token&&req.headers.time_schedule_email)){
       return res.status(200).json({status:"ERROR",message:"Header is not sent"})
     }
@@ -19,6 +17,5 @@ class SharedMiddleware{
       return res.status(200).json(response)
     }
   }
-
 }
 export default SharedMiddleware

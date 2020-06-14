@@ -30,13 +30,27 @@
       </ul>
     </div>
     <div *ngIf="navbarStatus; else profileBlock">
-      <a class="nav-link btn btn-success" routerLink="user/login"><u>L</u>ogin</a>
-      <a class="nav-link btn btn-primary" routerLink="user/signin"><u>S</u>ign</a>
+      <div class="row">
+        <div class="col">
+          <a class="nav-link btn btn-success" routerLink="user/login"><u>L</u>ogin</a>
+        </div>
+        <div class="col">
+          <a class="nav-link btn btn-primary" routerLink="user/signin"><u>S</u>ign</a>
+        </div>
+      </div>
     </div>
     <ng-template #profileBlock>
-      <img src="" width="50" height="50">
-      <a class="nav-link btn btn-warning" routerLink="user/profile">{{userProfilename}}</a>
-      <a class="nav-link btn btn-danger" (click)="logout()"><u>L</u>ogout</a>
+      <div><img src="" width="50" height="50"></div>
+      <div class="row d-flex justify-content-around">
+        <div  class="col-6 col-md-12 col-sm-6 col-lg-12">
+          <a class="nav-link" routerLink="user/profile">{{userProfilename}}</a>
+        </div>
+        <div class="col-6 col-md-12 col-sm-6 col-lg-12">
+          <a routerLink="#" class="btn btn-danger btn-sm ml-5" (click)="logout()">
+            <span class="glyphicon glyphicon-log-out ml-5"></span> <u>L</u>ogout
+          </a>
+        </div>
+      </div>
     </ng-template>
   </nav>
 
