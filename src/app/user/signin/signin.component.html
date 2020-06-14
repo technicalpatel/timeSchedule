@@ -1,5 +1,9 @@
+<ng-template [ngIf]="!spinnerValue">
 <div class="container">
   <form (ngSubmit)="userRegister(userRegisterForm)" #userRegisterForm="ngForm">
+    <div class="alert alert-danger animationClass" role="alert" *ngIf="errorMessage">
+      {{errorMessage.message}}
+    </div>
     <div class="alert alert-danger animationClass" role="alert" *ngIf="validFormChecked">
       Please fill up below all form details.
     </div>
@@ -35,7 +39,6 @@
           <label for="email">Email Address:</label>
           <input class="form-control" id="emailAddress" name="emailAddress" type="email" aria-labelledby="emailAddressHelp" placeholder="Email Address" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"  required ngModel>
           <span class="text-danger" *ngIf="userRegisterForm.controls.emailAddress?.hasError('required') && userRegisterForm.controls.emailAddress.touched">Email  id is required</span>
-          <span class="text-danger" *ngIf="userRegisterForm.controls.emailAddress?.hasError('pattern') && userRegisterForm.controls.emailAddress.touched">Please enter valid  email address</span>
         </div>
       </div>
     </div>
@@ -123,10 +126,100 @@
       </div>
       <div class="col col-md-12 container">
         <div class="form-group  container">
-          <button type="submit" class="btn btn-success btn-block" [disabled]="!(userRegisterForm.valid && !(userRegisterForm.controls.password.value!=userRegisterForm.controls.confirmPassword.value ||
-          userRegisterForm.controls.password.value=='' && userRegisterForm.controls.confirmPassword.value==''))">SUBMIT</button>
+          <button type="submit" class="btn btn-success btn-block"
+          [disabled]="!(userRegisterForm.valid && !(userRegisterForm.controls.password?.value!=userRegisterForm.controls.confirmPassword?.value ||
+          userRegisterForm.controls.password?.value=='' && userRegisterForm.controls.confirmPassword?.value==''))
+          ">SUBMIT</button>
         </div>
       </div>
     </div>
   </form>
 </div>
+</ng-template>
+<ng-template [ngIf]="spinnerValue">
+  <div class="spinner-grow ml-3" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3 text-secondary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3 text-secondary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3 text-secondary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3 text-secondary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3 text-secondary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3 text-secondary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3" role="status">
+  <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3 text-secondary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3 text-secondary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3 text-secondary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3 text-secondary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3 text-secondary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow ml-3" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <h1>Please Wait your register process is running........</h1>
+</ng-template>

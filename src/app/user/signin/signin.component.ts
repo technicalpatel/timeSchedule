@@ -1,4 +1,5 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/shared/model/user';
 import { UserServiceService } from 'src/app/shared/service/user-service.service';
@@ -11,19 +12,20 @@ import { UserServiceService } from 'src/app/shared/service/user-service.service'
 export class SigninComponent implements OnInit{
 // Form validation check validation
   validFormChecked:boolean=false;
+  errorMessage:any=false;
+  spinnerValue:Boolean=false;
 
 // Date validation and all date section
   startDate=new Date();
   maxDate:Date;
 
-
-  constructor(private userService:UserServiceService) {
+  constructor(private userService:UserServiceService,
+    private router:Router) {
     this.maxDate=new Date();
   }
 
   ngOnInit() {
   }
-
 
   // state and city section data
   states=["Gujarat","Goa"];
@@ -43,8 +45,17 @@ export class SigninComponent implements OnInit{
     }
     if(userRegisterForm.valid){
       let user:User=userRegisterForm.value;
-      this.userService.userRegistration(user);
-
+      this.userService.userRegistration(user).then((result:any)=>{
+        if(result.status=="OK"){
+          this.spinnerValue=!this.spinnerValue;
+          setTimeout(()=>{
+            this.router.navigate(['user/login']);
+          },2000);
+        }else{
+          this.errorMessage=result;
+        }
+      },(error)=>{
+      });
     }
   }
 }

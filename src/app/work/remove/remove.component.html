@@ -1,1 +1,27 @@
-<p>remove works!</p>
+<ng-template [ngIf]="taskProgressStatus">
+  <div class="d-flex w-100 justify-content-center mt-5">
+    <div class="spinner-border m-5 mt-5" role="status">
+      <span class="sr-only justify-content-center mt-5">Loading...</span>
+    </div>
+  </div>
+  <div class="d-flex w-100 justify-content-center">
+    <h5 class="justify-content-center">Fetching data in progressing....</h5>
+  </div>
+</ng-template>
+<div class="container" *ngIf="!taskProgressStatus">
+  <div class="card mt-3" *ngFor="let task of taskAllData">
+    <div class="card-header justify-content-between">
+      <div>
+        <h4>{{task.task_heading}}</h4>
+      </div>
+      <div>
+        {{task.task_start_date|date}}
+      </div>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{task.task_name}}</h5>
+      <p class="card-text">{{task.task_description}}</p>
+      <a routerLink="#" class="btn btn-primary">Remove </a>
+    </div>
+  </div>
+</div>

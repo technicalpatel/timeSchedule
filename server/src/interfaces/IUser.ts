@@ -10,5 +10,6 @@ export interface IUser extends Document{
   city:string,
   birthDate:Date,
   mobileNumber:Number,
-  password:string
+  password:string,
+  token?:string
 }
